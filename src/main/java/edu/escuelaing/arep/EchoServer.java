@@ -11,7 +11,7 @@ public class EchoServer {
     private static EchoServer instance = new EchoServer();
 
     public static EchoServer getInstance() {
-        return (instance);
+        return instance;
     }
 
     public void start() throws IOException {
@@ -42,7 +42,7 @@ public class EchoServer {
     private Socket activarSocket(ServerSocket socket) {
         Socket clientSocket = null;
         try {
-            System.out.println("Listo para recibir ...");
+            System.out.println("Activado");
             clientSocket = socket.accept();
         } catch (IOException e) {
             System.err.println("Accept failed.");
@@ -59,7 +59,7 @@ public class EchoServer {
             tipoArchivo(tipo, socket, file);
         } else {
             out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(errors(404));
+            out.println(error(404));
             out.close();
         }
 
@@ -136,7 +136,6 @@ public class EchoServer {
         while ((inputLine = in.readLine()) != null) {
             esPath = true;
             if (esPath && inputLine.startsWith("GET")) {
-                System.out.println("entro al if");
                 System.out.println("Path: " + inputLine.split(" ")[1].substring(1));
                 path = inputLine.split(" ")[1].substring(1);
                 esPath = false;
@@ -149,15 +148,19 @@ public class EchoServer {
         return path;
     }
 
-    private static String errors(int tipo) {
+    private static String error(int tipo) {
         String respuesta = "";
         if (tipo == 404) {
             respuesta = "HTTP/1.1 404 Not Found\r\n\r\n"
                     + "<!DOCTYPE html>"
                     + "<html>"
-                    + "<h1>404 Not Found</h1>"
-                    + "<br></br>"
-                    + "<img src=https://i.pinimg.com/originals/a2/2c/8a/a22c8a42037722a26a050c92e0908312.jpg>"
+                    + "<head>"
+                    + "<title>Home</title>"
+                    + "</head>"
+                    + "<body style='background-color:black'>"
+                    + "<h1 style='color:white'>File not found</h1>"
+                    + "<img src='https://www.trecebits.com/wp-content/uploads/2020/11/Error-404.jpg'>"
+                    + "</body>"
                     + "</html>";
         }
         return respuesta;

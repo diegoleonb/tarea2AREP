@@ -33,7 +33,7 @@ public class MultiHilosProcessor implements Runnable {
         try {
             echoSocket = new Socket("127.0.0.1", port);
         } catch (UnknownHostException e) {
-            System.err.println("Error en el host");
+            System.err.println("Error " + e.toString());
             System.exit(1);
         } catch (IOException e) {
             return conectarSocket();
