@@ -10,16 +10,16 @@ public class EchoClient {
     public static void main(String[] args) throws IOException {
         int hilos = Integer.parseInt(args[0]);
         ExecutorService pool = Executors.newFixedThreadPool(7);
-        multirequest(hilos, pool);
+        multiRequest(hilos, pool);
     }
 
-    private static int multirequest(int hilo, ExecutorService pool) {
+    private static int multiRequest(int hilo, ExecutorService pool) {
         hilos--;
         hilo = hilos;
         MultiHilosProcessor processor = new MultiHilosProcessor(getPort());
         pool.execute(processor);
         if (hilos > 0) {
-            multirequest(hilo, pool);
+            multiRequest(hilo, pool);
         }
         pool.shutdown();
         return hilo;

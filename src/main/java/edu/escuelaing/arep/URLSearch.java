@@ -1,4 +1,4 @@
-package edu.escuelaing.arem;
+package edu.escuelaing.arep;
 
 import java.net.URL;
 import java.util.Scanner;
