@@ -5,7 +5,7 @@
 
 Este taller presenta diferentes retos que los ayudarán a explorar los conceptos de esquemas de nombres y de clientes y servicios. Adicionalmente, el taller le ayudará a explorar la arquitectura de las aplicaciones distribuidas sobre internet.
 
-Se implementa unicamente el RETO 1
+Se implementa unicamente el RETO 1. No funciona en Heroku
 
 Aqui se muestra un ejemplo de su uso:
 
@@ -15,14 +15,6 @@ En caso de no encontrarse el recurso se le muestra al usuario pagina de error:
 
 ![](./img/media/Capture2.PNG)
 
-
-Si desea utilizar la app puede dirigirse al siguiente enlace de Heroku:
-
-```
-http://clientesyservicios.herokuapp.com/resources/public/index.html
-```
-
-Si desea dirigirse automaticamente dele click [clientesYservicios](http://clientesyservicios.herokuapp.com/resources/public/index.html)
 
 ## Tree
 
