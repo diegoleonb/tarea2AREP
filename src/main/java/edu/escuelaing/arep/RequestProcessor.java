@@ -9,6 +9,10 @@ public class RequestProcessor implements Runnable {
 
     private Socket clientSocket;
 
+    /**
+     * Constructor
+     * @param clienSocket
+     */
     public RequestProcessor(Socket clienSocket) {
         this.clientSocket = clienSocket;
     }

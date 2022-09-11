@@ -9,6 +9,10 @@ public class MultiHilosProcessor implements Runnable {
 
     private int port;
 
+    /**
+     * Constructor
+     * @param port
+     */
     public MultiHilosProcessor(int port) {
         this.port = port;
     }
@@ -28,6 +32,10 @@ public class MultiHilosProcessor implements Runnable {
         out.close();
     }
 
+    /**
+     * Conecta el socket al puerto
+     * @return
+     */
     private Socket conectarSocket() {
         Socket echoSocket = null;
         try {

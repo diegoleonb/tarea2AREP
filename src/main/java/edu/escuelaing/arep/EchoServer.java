@@ -28,6 +28,10 @@ public class EchoServer {
 
     }
 
+    /**
+     * Se inicializa el ServerSocket
+     * @return
+     */
     private ServerSocket iniciarServidor() {
         ServerSocket serverSocket = null;
         try {
@@ -39,6 +43,11 @@ public class EchoServer {
         return serverSocket;
     }
 
+    /**
+     * Se activa el Socket
+     * @param socket
+     * @return
+     */
     private Socket activarSocket(ServerSocket socket) {
         Socket clientSocket = null;
         try {
@@ -51,6 +60,13 @@ public class EchoServer {
         return clientSocket;
     }
 
+    /**
+     * Devuelve la respuesta en caso de que el archivo exista, 
+     * de lo contrario manda error y lo muestra en pantalla
+     * @param url
+     * @param socket
+     * @throws IOException
+     */
     public static void respuesta(String url, Socket socket) throws IOException {
         String tipo = url.substring(url.indexOf(".") + 1);
         File file = new File(url);
@@ -65,6 +81,14 @@ public class EchoServer {
 
     }
 
+    /**
+     * Verifica que tipo de archivo ha ingresado para hacer la 
+     * respectiva validacion y mirar a que metodo mandarlo
+     * @param tipo
+     * @param clientSocket
+     * @param archivo
+     * @throws IOException
+     */
     private static void tipoArchivo(String tipo, Socket clientSocket, File archivo) throws IOException {
 
         if (tipo.equals("png") || tipo.equals("jpg") || tipo.equals("gif")
@@ -75,6 +99,14 @@ public class EchoServer {
         }
     }
 
+    /**
+     * Muestra en pantalla archivos de tipo binario
+     * @param tipo
+     * @param clientSocket
+     * @param archivo
+     * @return
+     * @throws IOException
+     */
     private static String binario(String tipo, Socket clientSocket, File archivo) throws IOException {
         String outputLine = "";
         byte[] imagen = leerImagen(archivo);
@@ -91,6 +123,14 @@ public class EchoServer {
         return outputLine;
     }
 
+    /**
+     * Muestra en pantalla el archivo
+     * @param tipo
+     * @param clientSocket
+     * @param archivo
+     * @return
+     * @throws IOException
+     */
     private static String archivos(String tipo, Socket clientSocket, File archivo) throws IOException {
         String outputLine = "";
         PrintWriter out;
@@ -104,6 +144,12 @@ public class EchoServer {
         return outputLine;
     }
 
+    /**
+     * Lee el respectivo archivo
+     * @param archivo
+     * @return 
+     * @throws FileNotFoundException
+     */
     private static String leerArchivo(File archivo) throws FileNotFoundException {
         String lista = new String();
         try (Scanner scanner = new Scanner(archivo)) {
@@ -116,6 +162,12 @@ public class EchoServer {
         }
     }
 
+    /**
+     * Lee una imagen
+     * @param archivo
+     * @return
+     * @throws IOException
+     */
     private static byte[] leerImagen(File archivo) throws IOException {
         try {
             FileInputStream inputImage = new FileInputStream(archivo);
@@ -130,6 +182,12 @@ public class EchoServer {
 
     }
 
+    /**
+     * Retorna el path para ser enviado a Response
+     * @param in
+     * @return
+     * @throws IOException
+     */
     public static String request(BufferedReader in) throws IOException {
         String path = "";
         String inputLine = "";
@@ -148,6 +206,11 @@ public class EchoServer {
         return path;
     }
 
+    /**
+     * Muestra en pantalla que no se ha encontrado el archivo
+     * @param tipo
+     * @return
+     */
     private static String error(int tipo) {
         String respuesta = "";
         if (tipo == 404) {
@@ -166,6 +229,10 @@ public class EchoServer {
         return respuesta;
     }
 
+    /**
+     * Devuelve el puerto 35000 para ser usado por el servidor
+     * @return
+     */
     private int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
